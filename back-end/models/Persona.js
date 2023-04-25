@@ -11,11 +11,21 @@ const Persona = sequelize.define('Personas', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    apellido: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     dni: {
         type: DataTypes.INTEGER,
         allowNull: false,
         unique: true,
     },
+
+    genero: {
+        type: DataTypes.ENUM('masculino','femenino'),
+        allowNull: false,
+    },
+
 
 },{
     timestamps: false
