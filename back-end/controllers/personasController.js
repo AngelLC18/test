@@ -38,6 +38,22 @@ personasRouter.post("/personas", async (req, res) => {
   }
 })
 
+personasRouter.post('/personas', async (req, res) => {
+  try {
+    const { nombre, dni } = req.body;
+    const persona = await Persona.findOne({ where: { nombre, dni } });
+
+    if (persona) {
+      res.send('Datos válidos');
+    } else {
+      res.status(401).send('Datos inválidos');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error interno del servidor');
+  }
+});
+
 personasRouter.put("/personas/:id", async (req, res) => {
   try {
     const { id } = req.params
@@ -63,4 +79,6 @@ personasRouter.delete("/personas/:id", async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 })
+
+
 module.exports = personasRouter;
